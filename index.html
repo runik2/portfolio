@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Рунар Хамматов — портфолио</title>
+<meta name="description" content="Портфолио: обменник USDT, приём крипто-платежей, автозапчасти, автоматизация на Python.">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#0c1017; --bg2:#131a25; --card:#161e2b; --line:rgba(255,255,255,.09);
+    --text:#eef2f7; --muted:#93a0b4; --accent:#ff7a00; --accent2:#4ea8ff;
+  }
+  html{scroll-behavior:smooth}
+  body{
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    background:radial-gradient(1200px 600px at 80% -10%,rgba(78,168,255,.13),transparent 60%),
+               radial-gradient(900px 500px at 10% 10%,rgba(255,122,0,.10),transparent 55%),
+               var(--bg);
+    color:var(--text); line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:980px;margin:0 auto;padding:0 22px}
+  a{color:inherit;text-decoration:none}
+
+  /* hero */
+  header{padding:72px 0 48px}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);
+    border:1px solid var(--line);border-radius:999px;padding:6px 14px;margin-bottom:22px;
+  }
+  .dot{width:7px;height:7px;border-radius:50%;background:#41d18a;box-shadow:0 0 10px #41d18a}
+  h1{font-size:clamp(34px,6vw,56px);line-height:1.08;letter-spacing:-.02em;font-weight:700}
+  h1 span{color:var(--accent)}
+  .role{margin-top:14px;font-size:clamp(16px,2.4vw,20px);color:var(--accent2);font-weight:500}
+  .tagline{margin-top:16px;max-width:620px;color:var(--muted);font-size:17px}
+  .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;padding:12px 20px;border-radius:14px;
+    font-size:15px;font-weight:600;border:1px solid var(--line);background:var(--card);
+    transition:transform .15s,border-color .15s,background .15s;
+  }
+  .btn:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.25)}
+  .btn.primary{background:var(--accent);color:#1a0f00;border-color:transparent}
+  .btn svg{width:17px;height:17px;fill:currentColor}
+
+  /* sections */
+  section{padding:44px 0;border-top:1px solid var(--line)}
+  .h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
+  .about p{color:#c8d2e0;font-size:17px;margin-bottom:14px;max-width:760px}
+  .about p:last-child{margin-bottom:0}
+
+  /* projects */
+  .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+  .chip{
+    font-size:13px;padding:7px 14px;border-radius:999px;border:1px solid var(--line);
+    color:var(--muted);cursor:pointer;background:transparent;font-family:inherit;
+    transition:all .15s;
+  }
+  .chip:hover{color:var(--text);border-color:rgba(255,255,255,.25)}
+  .chip.active{background:var(--text);color:#0c1017;border-color:var(--text);font-weight:600}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;
+    display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden;
+    transition:transform .18s,border-color .18s;
+  }
+  .card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.22)}
+  .card.featured::before{
+    content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);
+  }
+  .card h3{font-size:18px;font-weight:650;letter-spacing:-.01em}
+  .card p{color:var(--muted);font-size:14.5px;flex:1}
+  .stack{display:flex;gap:6px;flex-wrap:wrap}
+  .tag{font-size:11.5px;padding:4px 9px;border-radius:6px;background:rgba(78,168,255,.12);color:#9fd0ff}
+  .links{display:flex;gap:14px;margin-top:4px;font-size:13.5px;font-weight:600}
+  .links a{color:var(--accent2);border-bottom:1px solid transparent}
+  .links a:hover{border-color:currentColor}
+
+  /* skills */
+  .skill-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
+  .sg h4{font-size:13px;color:var(--muted);margin-bottom:10px;letter-spacing:.04em}
+  .sg ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+  .sg li{font-size:13px;padding:5px 10px;border:1px solid var(--line);border-radius:8px;color:#c8d2e0}
+
+  /* contacts */
+  .contacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+  .contact{
+    display:flex;align-items:center;gap:12px;padding:16px 18px;border-radius:14px;
+    background:var(--card);border:1px solid var(--line);transition:border-color .15s,transform .15s;
+  }
+  .contact:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .contact .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:rgba(255,122,0,.14);color:var(--accent)}
+  .contact .ic svg{width:17px;height:17px;fill:currentColor}
+  .contact .l{font-size:12px;color:var(--muted)}
+  .contact .v{font-size:14.5px;font-weight:600}
+
+  footer{padding:34px 0 50px;border-top:1px solid var(--line);color:var(--muted);font-size:13.5px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+  @media(max-width:600px){
+    header{padding:48px 0 34px}
+    section{padding:34px 0}
+    .actions .btn{flex:1;justify-content:center}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow"><span class="dot"></span><span id="location">Казань</span></div>
+    <h1 id="name">…</h1>
+    <div class="role" id="role"></div>
+    <p class="tagline" id="tagline"></p>
+    <div class="actions" id="actions"></div>
+  </header>
+
+  <section class="about">
+    <div class="h2">Коротко о себе</div>
+    <div id="about"></div>
+  </section>
+
+  <section>
+    <div class="h2">Проекты</div>
+    <div class="filters" id="filters"></div>
+    <div class="grid" id="projects"></div>
+  </section>
+
+  <section>
+    <div class="h2">Навыки</div>
+    <div class="skill-groups" id="skills"></div>
+  </section>
+
+  <section>
+    <div class="h2">Связаться</div>
+    <div class="contacts" id="contacts"></div>
+  </section>
+
+  <footer>
+    <span id="footerName"></span>
+    <span id="year"></span>
+  </footer>
+</div>
+
+<script>
+const ICONS = {
+  tg: '<svg viewBox="0 0 24 24"><path d="M9.8 15.6l-.4 4c.6 0 .9-.3 1.2-.6l2.9-2.8 6 4.4c1.1.6 1.9.3 2.2-1l4-18.8c.4-1.6-.6-2.3-1.6-1.9L1.6 9.7C0 10.3 0 11.2 1.3 11.6l5.4 1.7L19 5.6c.6-.4 1.1-.2.7.2"/></svg>',
+  gh: '<svg viewBox="0 0 24 24"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.9 1.2 1.9 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .3"/></svg>',
+  mail: '<svg viewBox="0 0 24 24"><path d="M2 5.5A2.5 2.5 0 014.5 3h15A2.5 2.5 0 0122 5.5v13a2.5 2.5 0 01-2.5 2.5h-15A2.5 2.5 0 012 18.5v-13zm2.4.2L12 12l7.6-6.3H4.4z"/></svg>'
+};
+
+let DATA = null;
+let activeGroup = "все";
+
+function esc(s){return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+function renderHero(d){
+  document.getElementById("name").innerHTML = esc(d.name).replace(/\s(\S+)$/, ' <span>$1</span>');
+  document.getElementById("role").textContent = d.role;
+  document.getElementById("tagline").textContent = d.tagline;
+  document.getElementById("location").textContent = d.location;
+  document.getElementById("footerName").textContent = d.name + " · " + d.role;
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  document.getElementById("actions").innerHTML = d.contacts.map((c, i) =>
+    `<a class="btn ${i === 0 ? 'primary' : ''}" href="${esc(c.url)}" target="_blank" rel="noopener">
+       ${ICONS[c.icon] || ''}<span>${esc(c.label)}</span>
+     </a>`).join("");
+}
+
+function renderAbout(d){
+  document.getElementById("about").innerHTML = d.about.map(p => `<p>${esc(p)}</p>`).join("");
+}
+
+function renderProjects(d){
+  const groups = ["все", ...new Set(d.projects.map(p => p.group))];
+  const box = document.getElementById("filters");
+  box.innerHTML = groups.map(g =>
+    `<button class="chip ${g === activeGroup ? 'active' : ''}" data-g="${esc(g)}">${esc(g)}</button>`).join("");
+  box.querySelectorAll(".chip").forEach(b => b.onclick = () => { activeGroup = b.dataset.g; renderProjects(d); });
+
+  const list = d.projects.filter(p => activeGroup === "все" || p.group === activeGroup);
+  document.getElementById("projects").innerHTML = list.map(p => `
+    <article class="card ${p.featured ? 'featured' : ''}">
+      <h3>${esc(p.title)}</h3>
+      <p>${esc(p.desc)}</p>
+      <div class="stack">${p.stack.map(s => `<span class="tag">${esc(s)}</span>`).join("")}</div>
+      <div class="links">
+        <a href="${esc(p.url)}" target="_blank" rel="noopener">Код →</a>
+        ${p.demo ? `<a href="${esc(p.demo)}" target="_blank" rel="noopener">Открыть →</a>` : ""}
+      </div>
+    </article>`).join("");
+}
+
+function renderSkills(d){
+  document.getElementById("skills").innerHTML = d.skills.map(g => `
+    <div class="sg"><h4>${esc(g.group)}</h4>
+      <ul>${g.items.map(i => `<li>${esc(i)}</li>`).join("")}</ul>
+    </div>`).join("");
+}
+
+function renderContacts(d){
+  document.getElementById("contacts").innerHTML = d.contacts.map(c => `
+    <a class="contact" href="${esc(c.url)}" target="_blank" rel="noopener">
+      <div class="ic">${ICONS[c.icon] || ''}</div>
+      <div><div class="l">${esc(c.label)}</div><div class="v">${esc(c.value)}</div></div>
+    </a>`).join("");
+}
+
+fetch("data.json")
+  .then(r => r.json())
+  .then(d => {
+    DATA = d;
+    document.title = d.name + " — портфолио";
+    renderHero(d); renderAbout(d); renderProjects(d); renderSkills(d); renderContacts(d);
+  })
+  .catch(() => {
+    document.getElementById("name").textContent = "Не удалось загрузить data.json";
+  });
+</script>
+</body>
+</html>

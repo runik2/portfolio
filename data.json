@@ -1,0 +1,86 @@
+{
+  "name": "Рунар Хамматов",
+  "role": "Предприниматель · автоматизация · Python",
+  "location": "Казань, Россия",
+  "tagline": "Строю обменник USDT и подключаю бизнесы к приёму крипто-платежей. Код пишу для себя — чтобы рутина делалась без меня.",
+  "about": [
+    "Владелец обменника USDT: P2P-направление, работа с юанями и расчётами с зарубежными поставщиками.",
+    "Подключаю компании к приёму крипто-платежей: платёжные ссылки, интеграция в сайт и Telegram-бота, автоподтверждения.",
+    "Продаю автозапчасти — отсюда проекты про подбор по VIN, учёт машин и каталоги.",
+    "Автоматизирую то, что делаю руками: боты, парсеры, отчёты, контент для собственного канала."
+  ],
+  "contacts": [
+    { "label": "Telegram", "value": "@obmenik101", "url": "https://t.me/obmenik101", "icon": "tg" },
+    { "label": "GitHub", "value": "runik2", "url": "https://github.com/runik2", "icon": "gh" },
+    { "label": "Почта", "value": "xammatovrunar891@gmail.com", "url": "mailto:xammatovrunar891@gmail.com", "icon": "mail" }
+  ],
+  "skills": [
+    { "group": "Языки", "items": ["Python", "JavaScript", "TypeScript", "Go", "C#", "HTML/CSS"] },
+    { "group": "Данные и API", "items": ["REST API", "Gmail API", "Google Sheets", "Notion API", "Telegram Bot API", "парсинг"] },
+    { "group": "Платёжные системы", "items": ["USDT / TRC-20", "Bybit P2P", "приём крипто-платежей", "мерчант-интеграции"] },
+    { "group": "Инструменты", "items": ["Git", "GitHub Actions", "Docker", "CODESYS", "PostgreSQL", "Linux"] }
+  ],
+  "projects": [
+    {
+      "title": "Garage Copilot",
+      "desc": "PWA-журнал автомобилей: карточки машин, история работ, PDF-отчёты и пошаговые инструкции по ремонту.",
+      "stack": ["HTML", "PWA", "JavaScript"],
+      "url": "https://github.com/runik2/garage-copilot-mvp",
+      "group": "продукты",
+      "featured": true
+    },
+    {
+      "title": "АвтоМаг",
+      "desc": "Интернет-магазин автозапчастей: каталог, корзина, админ-панель. Демонстрационный проект на чистом JS.",
+      "stack": ["JavaScript", "HTML", "CSS"],
+      "url": "https://github.com/runik2/auto-parts-store",
+      "group": "продукты",
+      "featured": true
+    },
+    {
+      "title": "P2P Exchange",
+      "desc": "Платформа P2P-обмена валют: заявки, курсы, история сделок. TypeScript.",
+      "stack": ["TypeScript", "Node.js"],
+      "url": "https://github.com/runik2/p2p-exchange",
+      "group": "продукты",
+      "featured": true
+    },
+    {
+      "title": "Погода",
+      "desc": "Минимальное приложение погоды: один HTML-файл, бесплатный Open-Meteo, поиск любого города по-русски.",
+      "stack": ["HTML", "JavaScript", "Open-Meteo"],
+      "url": "https://github.com/runik2/weather-app",
+      "demo": "https://runik2.github.io/weather-app/",
+      "group": "продукты",
+      "featured": true
+    },
+    {
+      "title": "Приточная вентиляция",
+      "desc": "Учебный проект автоматизации приточной установки на CODESYS V3.5 (ST): пуск, продувка, защита по датчикам.",
+      "stack": ["CODESYS", "ST"],
+      "url": "https://github.com/runik2/pv-ventilation-codesys",
+      "group": "автоматизация"
+    },
+    {
+      "title": "Калькулятор на Go",
+      "desc": "Консольный калькулятор на Golang — разбор синтаксиса и работы с вводом.",
+      "stack": ["Go"],
+      "url": "https://github.com/runik2/calculator-on-GO",
+      "group": "учёба"
+    },
+    {
+      "title": "BuyTicket",
+      "desc": "Покупка билетов на Go: работа с формами и данными.",
+      "stack": ["Go"],
+      "url": "https://github.com/runik2/BuyTicket",
+      "group": "учёба"
+    },
+    {
+      "title": "Pacman",
+      "desc": "Консольная игра Pacman на C# — практика ООП и игрового цикла.",
+      "stack": ["C#"],
+      "url": "https://github.com/runik2/pacman",
+      "group": "учёба"
+    }
+  ]
+}
