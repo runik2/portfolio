@@ -76,6 +76,13 @@
       "group": "учёба"
     },
     {
+      "title": "Simple Web Server",
+      "desc": "Веб-сервер на Go: раздача статики и обработка запросов без фреймворков.",
+      "stack": ["Go"],
+      "url": "https://github.com/runik2/simple-web-server",
+      "group": "учёба"
+    },
+    {
       "title": "Pacman",
       "desc": "Консольная игра Pacman на C# — практика ООП и игрового цикла.",
       "stack": ["C#"],
