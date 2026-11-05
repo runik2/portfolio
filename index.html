@@ -22,8 +22,21 @@
   .wrap{max-width:980px;margin:0 auto;padding:0 22px}
   a{color:inherit;text-decoration:none}
 
+  /* navigation */
+  .topbar{position:sticky;top:0;z-index:10;margin:0 -22px;padding:12px 22px;background:rgba(12,16,23,.82);border-bottom:1px solid transparent;backdrop-filter:blur(16px);transition:border-color .2s}
+  .topbar.scrolled{border-color:var(--line)}
+  .topbar-inner{max-width:980px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:18px}
+  .brand{font-weight:750;letter-spacing:-.02em}
+  .brand span{color:var(--accent)}
+  .nav{display:flex;align-items:center;gap:6px}
+  .nav a{padding:7px 10px;border-radius:9px;font-size:13px;color:var(--muted);transition:background .15s,color .15s}
+  .nav a:hover{color:var(--text);background:var(--card)}
+  .nav-cta{background:var(--accent)!important;color:#1a0f00!important;font-weight:700}
+  .menu-toggle{display:none;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:9px;padding:7px 9px;font:inherit}
+
   /* hero */
   header{padding:72px 0 48px}
+  .hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(260px,.85fr);gap:34px;align-items:end}
   .eyebrow{
     display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);
     border:1px solid var(--line);border-radius:999px;padding:6px 14px;margin-bottom:22px;
@@ -42,15 +55,33 @@
   .btn:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.25)}
   .btn.primary{background:var(--accent);color:#1a0f00;border-color:transparent}
   .btn svg{width:17px;height:17px;fill:currentColor}
+  .hero-card{position:relative;overflow:hidden;background:linear-gradient(145deg,rgba(78,168,255,.14),rgba(255,122,0,.08) 70%),var(--card);border:1px solid var(--line);border-radius:20px;padding:22px}
+  .hero-card:after{content:"";position:absolute;width:170px;height:170px;right:-80px;top:-90px;border-radius:50%;background:rgba(78,168,255,.18);filter:blur(4px)}
+  .hero-card-label{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--accent2);font-weight:700}
+  .hero-card h2{font-size:22px;line-height:1.2;margin-top:10px;max-width:250px}
+  .hero-card p{color:#b3bfd0;font-size:14px;margin-top:10px;max-width:300px}
+  .hero-card-link{display:inline-flex;align-items:center;gap:6px;margin-top:18px;color:var(--accent2);font-size:13px;font-weight:700}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:28px}
+  .stat{padding:13px 14px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.025)}
+  .stat strong{display:block;font-size:21px;letter-spacing:-.03em}.stat span{display:block;color:var(--muted);font-size:11px;margin-top:2px}
 
   /* sections */
   section{padding:44px 0;border-top:1px solid var(--line)}
   .h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#a7b3c4;margin-bottom:24px}
   .about p{color:#c8d2e0;font-size:17px;margin-bottom:14px;max-width:760px}
   .about p:last-child{margin-bottom:0}
+  .about-layout{display:grid;grid-template-columns:minmax(0,1fr) 240px;gap:32px}
+  .availability{align-self:start;padding:16px;border:1px solid rgba(65,209,138,.22);border-radius:14px;background:rgba(65,209,138,.06)}
+  .availability strong{display:flex;align-items:center;gap:8px;font-size:13px}.availability p{font-size:12px!important;color:var(--muted)!important;margin-top:7px!important}
+  .availability .dot{display:inline-block;width:8px;height:8px;flex:none}
 
   /* projects */
-  .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+  .project-toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:22px}
+  .filters{display:flex;gap:8px;flex-wrap:wrap}
+  .search{width:230px;padding:10px 13px;border:1px solid var(--line);border-radius:11px;background:var(--card);color:var(--text);font:inherit;outline:none}
+  .search:focus{border-color:var(--accent2);box-shadow:0 0 0 3px rgba(78,168,255,.12)}
+  .search::placeholder{color:#748196}
+  .results{font-size:12px;color:var(--muted);margin-top:-12px;margin-bottom:14px}
   .chip{
     font-size:13.5px;padding:9px 16px;min-height:40px;border-radius:999px;border:1px solid var(--line);
     display:inline-flex;align-items:center;
@@ -69,6 +100,8 @@
   .card.featured::before{
     content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);
   }
+  .card.featured{background:linear-gradient(145deg,rgba(78,168,255,.07),transparent 55%),var(--card)}
+  .featured-label{display:inline-flex;align-items:center;gap:5px;color:var(--accent);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
   .card h3{font-size:18px;font-weight:650;letter-spacing:-.01em}
   .card p{color:#a9b6c8;font-size:14.5px;flex:1}
   .stack{display:flex;gap:6px;flex-wrap:wrap}
@@ -97,40 +130,70 @@
 
   footer{padding:34px 0 calc(50px + env(safe-area-inset-bottom));border-top:1px solid var(--line);color:var(--muted);font-size:13.5px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
   @media(max-width:600px){
+    .topbar{margin:0 -22px}.nav{display:none}.menu-toggle{display:block}.topbar.menu-open .nav{display:flex;position:absolute;left:22px;right:22px;top:58px;flex-direction:column;align-items:stretch;padding:8px;background:var(--card);border:1px solid var(--line);border-radius:13px;box-shadow:0 16px 40px rgba(0,0,0,.3)}.topbar.menu-open .nav a{text-align:center}
     header{padding:48px 0 34px}
     section{padding:34px 0}
     .actions .btn{flex:1;justify-content:center}
+    .hero-grid,.about-layout{grid-template-columns:1fr}.hero-card{display:none}.stats{margin-top:22px}.search{width:100%}
   }
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <header>
+  <div class="topbar" id="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top"><span>R</span>unar</a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Открыть меню">Меню</button>
+      <nav class="nav" id="nav">
+        <a href="#about">Обо мне</a>
+        <a href="#projects">Проекты</a>
+        <a href="#skills">Навыки</a>
+        <a href="#contact" class="nav-cta">Связаться</a>
+      </nav>
+    </div>
+  </div>
+
+  <header id="top">
+    <div class="hero-grid">
+      <div>
     <div class="eyebrow"><span class="dot"></span><span id="location">Казань</span></div>
     <h1 id="name">…</h1>
     <div class="role" id="role"></div>
     <p class="tagline" id="tagline"></p>
     <div class="actions" id="actions"></div>
+      </div>
+      <aside class="hero-card">
+        <div class="hero-card-label">Сейчас в работе</div>
+        <h2>Инструменты, которые убирают рутину</h2>
+        <p>Продукты для бизнеса, автоматизация процессов и ИИ-агенты под реальные задачи.</p>
+        <a class="hero-card-link" href="#projects">Смотреть проекты →</a>
+      </aside>
+    </div>
+    <div class="stats" id="stats"></div>
   </header>
 
-  <section class="about">
+  <section class="about" id="about">
     <div class="h2">Коротко о себе</div>
-    <div id="about"></div>
+    <div class="about-layout">
+      <div id="aboutText"></div>
+      <aside class="availability"><strong><span class="dot"></span>Открыт к задачам</strong><p>Автоматизация, интеграции, внутренние инструменты и AI-продукты.</p></aside>
+    </div>
   </section>
 
-  <section>
+  <section id="projects">
     <div class="h2">Проекты</div>
-    <div class="filters" id="filters"></div>
-    <div class="grid" id="projects"></div>
+    <div class="project-toolbar"><div class="filters" id="filters"></div><input class="search" id="projectSearch" type="search" placeholder="Поиск по проектам…" aria-label="Поиск по проектам"></div>
+    <div class="results" id="results"></div>
+    <div class="grid" id="projectGrid"></div>
   </section>
 
-  <section>
+  <section id="skills">
     <div class="h2">Навыки</div>
     <div class="skill-groups" id="skills"></div>
   </section>
 
-  <section>
+  <section id="contact">
     <div class="h2">Связаться</div>
     <div class="contacts" id="contacts"></div>
   </section>
@@ -150,6 +213,7 @@ const ICONS = {
 
 let DATA = null;
 let activeGroup = "все";
+let searchTerm = "";
 
 function esc(s){return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 
@@ -168,7 +232,16 @@ function renderHero(d){
 }
 
 function renderAbout(d){
-  document.getElementById("about").innerHTML = d.about.map(p => `<p>${esc(p)}</p>`).join("");
+  document.getElementById("aboutText").innerHTML = d.about.map(p => `<p>${esc(p)}</p>`).join("");
+}
+
+function renderStats(d){
+  const statItems = [
+    [d.projects.length, "проектов в портфолио"],
+    [d.skills.reduce((n, group) => n + group.items.length, 0), "технологий в стеке"],
+    [d.projects.filter(p => p.group === "продукты").length, "продуктов для бизнеса"]
+  ];
+  document.getElementById("stats").innerHTML = statItems.map(([value, label]) => `<div class="stat"><strong>${value}+</strong><span>${label}</span></div>`).join("");
 }
 
 function renderProjects(d){
@@ -178,9 +251,12 @@ function renderProjects(d){
     `<button class="chip ${g === activeGroup ? 'active' : ''}" data-g="${esc(g)}">${esc(g)}</button>`).join("");
   box.querySelectorAll(".chip").forEach(b => b.onclick = () => { activeGroup = b.dataset.g; renderProjects(d); });
 
-  const list = d.projects.filter(p => activeGroup === "все" || p.group === activeGroup);
-  document.getElementById("projects").innerHTML = list.map(p => `
+  const list = d.projects.filter(p => (activeGroup === "все" || p.group === activeGroup) &&
+    (!searchTerm || `${p.title} ${p.desc} ${p.stack.join(" ")}`.toLowerCase().includes(searchTerm))).sort((a, b) => Number(b.featured) - Number(a.featured));
+  document.getElementById("results").textContent = `${list.length} ${list.length === 1 ? "проект" : "проектов"}`;
+  document.getElementById("projectGrid").innerHTML = list.length ? list.map(p => `
     <article class="card ${p.featured ? 'featured' : ''}">
+      ${p.featured ? '<div class="featured-label">✦ Избранный проект</div>' : ''}
       <h3>${esc(p.title)}</h3>
       <p>${esc(p.desc)}</p>
       <div class="stack">${p.stack.map(s => `<span class="tag">${esc(s)}</span>`).join("")}</div>
@@ -188,7 +264,7 @@ function renderProjects(d){
         <a href="${esc(p.url)}" target="_blank" rel="noopener">Код →</a>
         ${p.demo ? `<a href="${esc(p.demo)}" target="_blank" rel="noopener">Открыть →</a>` : ""}
       </div>
-    </article>`).join("");
+    </article>`).join("") : `<div class="card"><h3>Ничего не найдено</h3><p>Попробуйте изменить запрос или выбрать другую категорию.</p></div>`;
 }
 
 function renderSkills(d){
@@ -211,11 +287,23 @@ fetch("data.json?v=2026-11-05-agenthub")
   .then(d => {
     DATA = d;
     document.title = d.name + " — портфолио";
-    renderHero(d); renderAbout(d); renderProjects(d); renderSkills(d); renderContacts(d);
+    renderHero(d); renderAbout(d); renderStats(d); renderProjects(d); renderSkills(d); renderContacts(d);
   })
   .catch(() => {
     document.getElementById("name").textContent = "Не удалось загрузить data.json";
   });
+
+const search = document.getElementById("projectSearch");
+search.addEventListener("input", event => { searchTerm = event.target.value.trim().toLowerCase(); if (DATA) renderProjects(DATA); });
+document.addEventListener("keydown", event => {
+  if (event.key === "/" && document.activeElement !== search) { event.preventDefault(); search.focus(); }
+  if (event.key === "Escape" && document.activeElement === search) { search.value = ""; searchTerm = ""; if (DATA) renderProjects(DATA); search.blur(); }
+});
+const topbar = document.getElementById("topbar");
+window.addEventListener("scroll", () => topbar.classList.toggle("scrolled", window.scrollY > 12), { passive: true });
+const menuToggle = document.getElementById("menuToggle");
+menuToggle.addEventListener("click", () => topbar.classList.toggle("menu-open"));
+document.querySelectorAll(".nav a").forEach(link => link.addEventListener("click", () => topbar.classList.remove("menu-open")));
 </script>
 </body>
 </html>
