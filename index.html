@@ -114,13 +114,13 @@
 
   /* project detail dialog */
   .modal{position:fixed;inset:0;z-index:30;display:none;place-items:center;padding:20px;background:rgba(4,7,12,.78);backdrop-filter:blur(12px)}
-  .modal.open{display:grid}
+  .modal.open{display:grid}.modal.open .modal-shell{animation:modalIn .32s cubic-bezier(.2,.8,.2,1) both}
   .modal-shell{width:min(920px,100%);max-height:min(860px,calc(100vh - 40px));overflow:auto;background:var(--bg2);border:1px solid rgba(255,255,255,.14);border-radius:22px;box-shadow:0 24px 80px rgba(0,0,0,.45)}
   .modal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:24px 26px;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(19,26,37,.94);backdrop-filter:blur(12px);z-index:2}
   .modal-kicker{font-size:11px;color:var(--accent);font-weight:700;letter-spacing:.14em;text-transform:uppercase}.modal h2{font-size:27px;line-height:1.15;margin-top:7px}.modal-close{width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--text);font-size:20px;cursor:pointer}
   .modal-body{padding:26px}.detail-intro{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(230px,.85fr);gap:24px}.detail-intro p{font-size:16px;color:#c8d2e0;line-height:1.7}.detail-side{border:1px solid var(--line);border-radius:15px;padding:16px;background:rgba(255,255,255,.025)}.detail-side strong{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}.detail-side p{font-size:14px;margin-top:8px;color:var(--text)}
   .detail-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:24px}.detail-block{padding:18px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.025)}.detail-block h3{font-size:14px;margin-bottom:8px}.detail-block p,.detail-block li{font-size:13.5px;color:#aebbd0}.detail-block ul{padding-left:18px;display:grid;gap:5px}.detail-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
-  .preview{margin-top:24px}.preview h3{font-size:14px;margin-bottom:12px}.preview-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.shot{min-height:190px;border-radius:14px;border:1px solid rgba(255,255,255,.12);overflow:hidden;background:#101722;position:relative;padding:18px}.shot-bar{display:flex;gap:5px;margin-bottom:16px}.shot-bar i{width:7px;height:7px;border-radius:50%;background:#ff7a00}.shot-bar i:nth-child(2){background:#4ea8ff}.shot-bar i:nth-child(3){background:#41d18a}.shot-title{font-size:12px;color:#eef2f7;font-weight:700}.shot-copy{font-size:11px;color:#8ea0b8;margin-top:8px;line-height:1.5}.shot-lines{display:grid;gap:7px;margin-top:14px}.shot-lines span{height:7px;border-radius:99px;background:rgba(78,168,255,.24)}.shot-lines span:nth-child(2){width:78%}.shot-lines span:nth-child(3){width:56%}.shot-badge{display:inline-flex;margin-top:14px;padding:5px 8px;border-radius:6px;background:rgba(255,122,0,.16);color:#ffb064;font-size:10px}.shot-image{width:100%;height:190px;object-fit:cover}.modal-footer{display:flex;justify-content:flex-end;gap:10px;margin-top:24px}.modal-link{display:inline-flex;align-items:center;padding:10px 14px;border-radius:10px;background:var(--accent);color:#1a0f00;font-size:13px;font-weight:700}
+  .preview{margin-top:24px}.preview h3{font-size:14px;margin-bottom:12px}.preview-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.preview-grid.single{grid-template-columns:1fr}.shot{border-radius:16px;border:1px solid rgba(255,255,255,.14);overflow:hidden;background:#101722;position:relative;box-shadow:0 12px 34px rgba(0,0,0,.22);animation:shotIn .55s both}.shot:nth-child(2){animation-delay:.08s}.shot-image{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;transition:transform .45s ease,filter .45s ease}.shot:hover .shot-image{transform:scale(1.025);filter:saturate(1.08)}.shot-caption{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 14px;color:#b9c7d9;font-size:11px}.shot-caption b{color:#eef2f7;font-size:12px}@keyframes shotIn{from{opacity:0;transform:translateY(10px) scale(.985)}to{opacity:1;transform:none}}.modal-footer{display:flex;justify-content:flex-end;gap:10px;margin-top:24px}.modal-link{display:inline-flex;align-items:center;padding:10px 14px;border-radius:10px;background:var(--accent);color:#1a0f00;font-size:13px;font-weight:700}
 
   /* skills */
   .skill-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
@@ -141,6 +141,7 @@
   .contact .v{font-size:14.5px;font-weight:600}
 
   footer{padding:34px 0 calc(50px + env(safe-area-inset-bottom));border-top:1px solid var(--line);color:var(--muted);font-size:13.5px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+  @keyframes modalIn{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
   @media(max-width:600px){
     .topbar{margin:0 -22px}.nav{display:none}.menu-toggle{display:block}.topbar.menu-open .nav{display:flex;position:absolute;left:22px;right:22px;top:58px;flex-direction:column;align-items:stretch;padding:8px;background:var(--card);border:1px solid var(--line);border-radius:13px;box-shadow:0 16px 40px rgba(0,0,0,.3)}.topbar.menu-open .nav a{text-align:center}
     header{padding:48px 0 34px}
@@ -271,16 +272,16 @@ function renderStats(d){
 }
 
 function previewMarkup(type){
-  if (type === "garage") return `<div class="shot"><img class="shot-image" src="shots/garage-copilot.png" alt="Иллюстрация Garage Copilot"></div><div class="shot"><div class="shot-bar"><i></i><i></i><i></i></div><div class="shot-title">Рабочий лист · Kia Ceed</div><div class="shot-copy">Масло и фильтр · 6 шагов · источник: PDF</div><div class="shot-lines"><span></span><span></span><span></span></div><span class="shot-badge">ПРОВЕРЕНО</span></div>`;
-  const labels = {agenthub:["Workspace overview","Active agents · 12"],store:["Каталог запчастей","Тормозная система"],exchange:["Лента сделок","USDT → RUB"]}[type];
-  return labels.map((label, i) => `<div class="shot"><div class="shot-bar"><i></i><i></i><i></i></div><div class="shot-title">${label}</div><div class="shot-copy">${i === 0 ? "Рабочий стол · сводка и быстрые действия" : "Статус, детали и следующий шаг"}</div><div class="shot-lines"><span></span><span></span><span></span></div><span class="shot-badge">LIVE PREVIEW</span></div>`).join("");
+  const assets = {agenthub:["shots/agenthub-dashboard.png","AgentHub · Dashboard"],garage:["shots/garage-copilot.png","Garage Copilot · сервис и ремонт"],store:["shots/automag-catalog.png","АвтоМаг · каталог запчастей"],exchange:["shots/p2p-exchange.png","P2P Exchange · сделки"]};
+  const [src, caption] = assets[type];
+  return `<figure class="shot"><img class="shot-image" src="${src}" alt="${caption}" loading="lazy" decoding="async"><figcaption class="shot-caption"><b>${caption}</b><span>Экран проекта</span></figcaption></figure>`;
 }
 
 function openDetails(title){
   const item = DETAILS[title]; if (!item) return;
   document.getElementById("detailKicker").textContent = item.kicker;
   document.getElementById("detailTitle").textContent = title;
-  document.getElementById("detailBody").innerHTML = `<div class="detail-intro"><p>${item.intro}</p><div class="detail-side"><strong>Зачем нужен</strong><p>${item.value}</p></div></div><div class="detail-grid">${item.blocks.map(([heading, list]) => `<div class="detail-block"><h3>${heading}</h3><ul>${list.map(x => `<li>${x}</li>`).join("")}</ul></div>`).join("")}</div><div class="preview"><h3>Визуальный preview</h3><div class="preview-grid">${previewMarkup(item.screen)}</div></div><div class="detail-tags">${item.tags.map(x => `<span class="tag">${x}</span>`).join("")}</div><div class="modal-footer"><a class="modal-link" href="${item.url}" target="_blank" rel="noopener">Открыть код на GitHub →</a></div>`;
+  document.getElementById("detailBody").innerHTML = `<div class="detail-intro"><p>${item.intro}</p><div class="detail-side"><strong>Зачем нужен</strong><p>${item.value}</p></div></div><div class="detail-grid">${item.blocks.map(([heading, list]) => `<div class="detail-block"><h3>${heading}</h3><ul>${list.map(x => `<li>${x}</li>`).join("")}</ul></div>`).join("")}</div><div class="preview"><h3>Скриншот интерфейса</h3><div class="preview-grid single">${previewMarkup(item.screen)}</div></div><div class="detail-tags">${item.tags.map(x => `<span class="tag">${x}</span>`).join("")}</div><div class="modal-footer"><a class="modal-link" href="${item.url}" target="_blank" rel="noopener">Открыть код на GitHub →</a></div>`;
   document.getElementById("detailModal").classList.add("open"); document.body.style.overflow = "hidden";
 }
 
