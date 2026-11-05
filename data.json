@@ -22,6 +22,14 @@
   ],
   "projects": [
     {
+      "title": "AgentHub",
+      "desc": "Платформа управления ИИ-агентами: роли и промпты, чаты, провайдеры моделей, аналитика токенов, стоимость и журнал действий.",
+      "stack": ["React", "TypeScript", "FastAPI", "SQLite"],
+      "url": "https://github.com/runik2/agenthub-ai-platform",
+      "group": "продукты",
+      "featured": true
+    },
+    {
       "title": "Garage Copilot",
       "desc": "PWA-журнал автомобилей: карточки машин, история работ, PDF-отчёты и пошаговые инструкции по ремонту.",
       "stack": ["HTML", "PWA", "JavaScript"],
