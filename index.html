@@ -109,6 +109,18 @@
   .links{display:flex;gap:14px;margin-top:4px;font-size:13.5px;font-weight:600}
   .links a{color:var(--accent2);border-bottom:1px solid transparent}
   .links a:hover{border-color:currentColor}
+  .detail-button{border:0;background:transparent;padding:0;color:var(--accent2);font:inherit;font-size:13.5px;font-weight:700;cursor:pointer}
+  .detail-button:hover{text-decoration:underline}
+
+  /* project detail dialog */
+  .modal{position:fixed;inset:0;z-index:30;display:none;place-items:center;padding:20px;background:rgba(4,7,12,.78);backdrop-filter:blur(12px)}
+  .modal.open{display:grid}
+  .modal-shell{width:min(920px,100%);max-height:min(860px,calc(100vh - 40px));overflow:auto;background:var(--bg2);border:1px solid rgba(255,255,255,.14);border-radius:22px;box-shadow:0 24px 80px rgba(0,0,0,.45)}
+  .modal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:24px 26px;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(19,26,37,.94);backdrop-filter:blur(12px);z-index:2}
+  .modal-kicker{font-size:11px;color:var(--accent);font-weight:700;letter-spacing:.14em;text-transform:uppercase}.modal h2{font-size:27px;line-height:1.15;margin-top:7px}.modal-close{width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--text);font-size:20px;cursor:pointer}
+  .modal-body{padding:26px}.detail-intro{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(230px,.85fr);gap:24px}.detail-intro p{font-size:16px;color:#c8d2e0;line-height:1.7}.detail-side{border:1px solid var(--line);border-radius:15px;padding:16px;background:rgba(255,255,255,.025)}.detail-side strong{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}.detail-side p{font-size:14px;margin-top:8px;color:var(--text)}
+  .detail-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:24px}.detail-block{padding:18px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.025)}.detail-block h3{font-size:14px;margin-bottom:8px}.detail-block p,.detail-block li{font-size:13.5px;color:#aebbd0}.detail-block ul{padding-left:18px;display:grid;gap:5px}.detail-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  .preview{margin-top:24px}.preview h3{font-size:14px;margin-bottom:12px}.preview-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.shot{min-height:190px;border-radius:14px;border:1px solid rgba(255,255,255,.12);overflow:hidden;background:#101722;position:relative;padding:18px}.shot-bar{display:flex;gap:5px;margin-bottom:16px}.shot-bar i{width:7px;height:7px;border-radius:50%;background:#ff7a00}.shot-bar i:nth-child(2){background:#4ea8ff}.shot-bar i:nth-child(3){background:#41d18a}.shot-title{font-size:12px;color:#eef2f7;font-weight:700}.shot-copy{font-size:11px;color:#8ea0b8;margin-top:8px;line-height:1.5}.shot-lines{display:grid;gap:7px;margin-top:14px}.shot-lines span{height:7px;border-radius:99px;background:rgba(78,168,255,.24)}.shot-lines span:nth-child(2){width:78%}.shot-lines span:nth-child(3){width:56%}.shot-badge{display:inline-flex;margin-top:14px;padding:5px 8px;border-radius:6px;background:rgba(255,122,0,.16);color:#ffb064;font-size:10px}.shot-image{width:100%;height:190px;object-fit:cover}.modal-footer{display:flex;justify-content:flex-end;gap:10px;margin-top:24px}.modal-link{display:inline-flex;align-items:center;padding:10px 14px;border-radius:10px;background:var(--accent);color:#1a0f00;font-size:13px;font-weight:700}
 
   /* skills */
   .skill-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
@@ -135,6 +147,7 @@
     section{padding:34px 0}
     .actions .btn{flex:1;justify-content:center}
     .hero-grid,.about-layout{grid-template-columns:1fr}.hero-card{display:none}.stats{margin-top:22px}.search{width:100%}
+    .modal{padding:10px}.modal-shell{max-height:calc(100vh - 20px);border-radius:17px}.modal-head,.modal-body{padding:18px}.detail-intro,.detail-grid,.preview-grid{grid-template-columns:1fr}.modal h2{font-size:23px}
   }
 </style>
 </head>
@@ -204,6 +217,13 @@
   </footer>
 </div>
 
+<div class="modal" id="detailModal" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+  <div class="modal-shell">
+    <div class="modal-head"><div><div class="modal-kicker" id="detailKicker">Проект</div><h2 id="detailTitle"></h2></div><button class="modal-close" id="detailClose" type="button" aria-label="Закрыть">×</button></div>
+    <div class="modal-body" id="detailBody"></div>
+  </div>
+</div>
+
 <script>
 const ICONS = {
   tg: '<svg viewBox="0 0 24 24"><path d="M9.8 15.6l-.4 4c.6 0 .9-.3 1.2-.6l2.9-2.8 6 4.4c1.1.6 1.9.3 2.2-1l4-18.8c.4-1.6-.6-2.3-1.6-1.9L1.6 9.7C0 10.3 0 11.2 1.3 11.6l5.4 1.7L19 5.6c.6-.4 1.1-.2.7.2"/></svg>',
@@ -214,6 +234,12 @@ const ICONS = {
 let DATA = null;
 let activeGroup = "все";
 let searchTerm = "";
+const DETAILS = {
+  "AgentHub": { kicker:"Продукт · AI-инфраструктура", intro:"Единая рабочая среда для создания, запуска и контроля ИИ-агентов. AgentHub собирает в одном интерфейсе промпты, модели, провайдеров, диалоги и расходы — чтобы агентами можно было управлять как настоящим продуктом.", value:"Нужен, когда агентов становится больше одного и важно понимать не только ответ модели, но и стоимость, стабильность и историю изменений.", blocks:[["Что внутри",["Конструктор агентов и шаблоны ролей","Реальный чат с историей диалога","Ollama и OpenAI-совместимые провайдеры","Дашборд токенов, стоимости и ошибок"]],["Инженерная часть",["FastAPI + React + TypeScript","SQLite в local-режиме и Docker-контур","JWT, Argon2id, Fernet для секретов","Аудит действий и адаптивный RU/EN-интерфейс"]]], tags:["React","TypeScript","FastAPI","SQLite","Ollama"], screen:"agenthub", url:"https://github.com/runik2/agenthub-ai-platform" },
+  "Garage Copilot": { kicker:"Продукт · automotive", intro:"Личный цифровой журнал автомобиля и помощник по ремонту. Проект превращает разрозненные работы, PDF-источники и заметки в понятный рабочий лист с привязкой шагов к конкретной машине.", value:"Нужен владельцу автомобиля или небольшой мастерской, чтобы не терять историю обслуживания и не искать одну и ту же информацию заново.", blocks:[["Что внутри",["Карточки автомобилей и история работ","Пошаговые руководства по системам","Импорт PDF и поиск по страницам","Подтверждённые спецификации и заметки"]],["Особенность",["Работает локально и не требует VIN-сервиса","Данные привязаны к конкретному автомобилю","Опасные значения не выдумываются — нужен источник","PWA-подход и печать рабочего листа"]]], tags:["React","PWA","PostgreSQL","PDF","Express"], screen:"garage", url:"https://github.com/runik2/garage-copilot-mvp" },
+  "АвтоМаг": { kicker:"Продукт · e-commerce", intro:"Демонстрационный интернет-магазин автозапчастей с каталогом, корзиной и админ-панелью. Пользовательский сценарий проходит от поиска детали до оформления заказа.", value:"Показывает, как быстро собрать понятный коммерческий интерфейс без тяжёлой инфраструктуры и сохранить основные сценарии магазина.", blocks:[["Сценарии",["Каталог с фильтрами и поиском","Карточки товаров, избранное и корзина","Оформление заказа","Роли пользователя и администратора"]],["Технический подход",["Чистый JavaScript без сборки","Локальное хранение данных","Адаптивная тёмная и светлая тема","Тосты, модальные окна и CRUD-экраны"]]], tags:["JavaScript","HTML","CSS","localStorage"], screen:"store", url:"https://github.com/runik2/auto-parts-store" },
+  "P2P Exchange": { kicker:"Продукт · fintech prototype", intro:"Полноценный прототип P2P-обмена с лентой сделок, бронированием, чатом и Telegram-ботом. Проект моделирует целый процесс сделки между пользователями.", value:"Нужен как основа для обменного сервиса, где важны прозрачный статус сделки, история операций и коммуникация внутри заказа.", blocks:[["Что работает",["Регистрация и авторизация","Лента сделок и детали операции","Прогресс бронирования","Рейтинг и история пользователя"]],["Архитектура",["React + TypeScript на frontend","Node.js + Express на backend","PostgreSQL для операций и истории","Telegram Bot API для уведомлений"]]], tags:["React","TypeScript","Node.js","PostgreSQL","Telegram"], screen:"exchange", url:"https://github.com/runik2/p2p-exchange" }
+};
 
 function esc(s){return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 
@@ -244,6 +270,22 @@ function renderStats(d){
   document.getElementById("stats").innerHTML = statItems.map(([value, label]) => `<div class="stat"><strong>${value}+</strong><span>${label}</span></div>`).join("");
 }
 
+function previewMarkup(type){
+  if (type === "garage") return `<div class="shot"><img class="shot-image" src="shots/garage-copilot.png" alt="Иллюстрация Garage Copilot"></div><div class="shot"><div class="shot-bar"><i></i><i></i><i></i></div><div class="shot-title">Рабочий лист · Kia Ceed</div><div class="shot-copy">Масло и фильтр · 6 шагов · источник: PDF</div><div class="shot-lines"><span></span><span></span><span></span></div><span class="shot-badge">ПРОВЕРЕНО</span></div>`;
+  const labels = {agenthub:["Workspace overview","Active agents · 12"],store:["Каталог запчастей","Тормозная система"],exchange:["Лента сделок","USDT → RUB"]}[type];
+  return labels.map((label, i) => `<div class="shot"><div class="shot-bar"><i></i><i></i><i></i></div><div class="shot-title">${label}</div><div class="shot-copy">${i === 0 ? "Рабочий стол · сводка и быстрые действия" : "Статус, детали и следующий шаг"}</div><div class="shot-lines"><span></span><span></span><span></span></div><span class="shot-badge">LIVE PREVIEW</span></div>`).join("");
+}
+
+function openDetails(title){
+  const item = DETAILS[title]; if (!item) return;
+  document.getElementById("detailKicker").textContent = item.kicker;
+  document.getElementById("detailTitle").textContent = title;
+  document.getElementById("detailBody").innerHTML = `<div class="detail-intro"><p>${item.intro}</p><div class="detail-side"><strong>Зачем нужен</strong><p>${item.value}</p></div></div><div class="detail-grid">${item.blocks.map(([heading, list]) => `<div class="detail-block"><h3>${heading}</h3><ul>${list.map(x => `<li>${x}</li>`).join("")}</ul></div>`).join("")}</div><div class="preview"><h3>Визуальный preview</h3><div class="preview-grid">${previewMarkup(item.screen)}</div></div><div class="detail-tags">${item.tags.map(x => `<span class="tag">${x}</span>`).join("")}</div><div class="modal-footer"><a class="modal-link" href="${item.url}" target="_blank" rel="noopener">Открыть код на GitHub →</a></div>`;
+  document.getElementById("detailModal").classList.add("open"); document.body.style.overflow = "hidden";
+}
+
+function closeDetails(){ document.getElementById("detailModal").classList.remove("open"); document.body.style.overflow = ""; }
+
 function renderProjects(d){
   const groups = ["все", ...new Set(d.projects.map(p => p.group))];
   const box = document.getElementById("filters");
@@ -263,8 +305,10 @@ function renderProjects(d){
       <div class="links">
         <a href="${esc(p.url)}" target="_blank" rel="noopener">Код →</a>
         ${p.demo ? `<a href="${esc(p.demo)}" target="_blank" rel="noopener">Открыть →</a>` : ""}
+        ${DETAILS[p.title] ? `<button class="detail-button" type="button" data-detail="${esc(p.title)}">Подробнее →</button>` : ""}
       </div>
     </article>`).join("") : `<div class="card"><h3>Ничего не найдено</h3><p>Попробуйте изменить запрос или выбрать другую категорию.</p></div>`;
+  document.querySelectorAll("[data-detail]").forEach(button => button.addEventListener("click", () => openDetails(button.dataset.detail)));
 }
 
 function renderSkills(d){
@@ -304,6 +348,9 @@ window.addEventListener("scroll", () => topbar.classList.toggle("scrolled", wind
 const menuToggle = document.getElementById("menuToggle");
 menuToggle.addEventListener("click", () => topbar.classList.toggle("menu-open"));
 document.querySelectorAll(".nav a").forEach(link => link.addEventListener("click", () => topbar.classList.remove("menu-open")));
+document.getElementById("detailClose").addEventListener("click", closeDetails);
+document.getElementById("detailModal").addEventListener("click", event => { if (event.target.id === "detailModal") closeDetails(); });
+document.addEventListener("keydown", event => { if (event.key === "Escape") closeDetails(); });
 </script>
 </body>
 </html>
